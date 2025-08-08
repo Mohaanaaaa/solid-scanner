@@ -1,0 +1,1 @@
+2025-08-08 08:45:32,519 - OCR failed or produced invalid result: ''. Manual review needed.
