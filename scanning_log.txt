@@ -1,1 +1,58 @@
 2025-08-08 08:45:32,519 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:02:25,081 - SUCCESS: Booklet with Reg No. 2019143 processed. PDF saved to output/2019143.pdf
+2025-08-08 09:03:29,337 - OCR failed or produced invalid result: '201'. Manual review needed.
+2025-08-08 09:03:29,337 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:04:05,419 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:04:05,420 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:04:15,145 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:04:15,145 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:04:23,526 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:04:23,526 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:04:35,749 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:04:35,750 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:04:44,201 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:04:44,202 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:04:56,165 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:04:56,165 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:05:06,140 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:05:06,141 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:05:14,867 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:05:14,868 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:05:27,725 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:05:27,726 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:05:53,394 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:05:53,395 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:06:03,847 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:06:03,847 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:06:32,257 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:06:32,258 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:06:43,921 - OCR failed or produced invalid result: '21018232
+7'. Manual review needed.
+2025-08-08 09:06:43,922 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:06:54,062 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:06:54,063 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:07:10,671 - OCR failed or produced invalid result: '2101
+7'. Manual review needed.
+2025-08-08 09:07:10,671 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:07:24,152 - OCR failed or produced invalid result: '0'. Manual review needed.
+2025-08-08 09:07:24,153 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:07:54,384 - OCR failed or produced invalid result: '2'. Manual review needed.
+2025-08-08 09:07:54,385 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:08:04,340 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:08:04,341 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:08:15,339 - OCR failed or produced invalid result: '3'. Manual review needed.
+2025-08-08 09:08:15,339 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:08:25,450 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:08:25,451 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:08:37,342 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:08:37,343 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:08:53,933 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:08:53,934 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:09:16,418 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:09:16,419 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:09:24,044 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:09:24,044 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:09:39,462 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:09:39,463 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:09:50,122 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 09:09:50,123 - FAILURE: OCR failed to extract a valid registration number.

@@ -27,7 +27,8 @@ logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
 # You MUST update these coordinates to match the location of the handwritten number
 # on your first page image (Screenshot (8).png).
 # Format: (x, y, width, height)
-REG_NUM_ROI = (50, 140, 280, 40)
+#REG_NUM_ROI = (50, 140, 280, 40)
+REG_NUM_ROI = (10, 150, 216, 40)
  # Placeholder, you must change this!
 
 # ====================================================================
