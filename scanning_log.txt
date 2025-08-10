@@ -56,3 +56,7 @@
 2025-08-08 09:09:39,463 - FAILURE: OCR failed to extract a valid registration number.
 2025-08-08 09:09:50,122 - OCR failed or produced invalid result: ''. Manual review needed.
 2025-08-08 09:09:50,123 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 09:22:06,177 - SUCCESS: Booklet with Reg No. 2019143 processed. PDF saved to output/2019143.pdf
+2025-08-08 18:28:53,156 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-08 18:28:53,157 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-08 18:30:03,496 - SUCCESS: Booklet with Reg No. 2019143 processed. PDF saved to output/2019143.pdf
