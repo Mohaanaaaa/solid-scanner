@@ -60,3 +60,60 @@
 2025-08-08 18:28:53,156 - OCR failed or produced invalid result: ''. Manual review needed.
 2025-08-08 18:28:53,157 - FAILURE: OCR failed to extract a valid registration number.
 2025-08-08 18:30:03,496 - SUCCESS: Booklet with Reg No. 2019143 processed. PDF saved to output/2019143.pdf
+2025-08-10 18:19:24,028 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:19:24,028 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:22:21,157 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:22:21,158 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:22:31,165 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:22:31,166 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:23:11,561 - OCR failed or produced invalid result: '1'. Manual review needed.
+2025-08-10 18:23:11,562 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:23:29,294 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:23:29,294 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:23:40,000 - OCR failed or produced invalid result: '752'. Manual review needed.
+2025-08-10 18:23:40,001 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:23:56,065 - SUCCESS: Booklet with Reg No. 521012501 processed. PDF saved to output/521012501.pdf
+2025-08-10 18:24:10,990 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:24:10,990 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:24:22,440 - OCR failed or produced invalid result: '7959'. Manual review needed.
+2025-08-10 18:24:22,441 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:24:32,396 - OCR failed or produced invalid result: '9593'. Manual review needed.
+2025-08-10 18:24:32,396 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:24:39,943 - SUCCESS: Booklet with Reg No. 197950260991 processed. PDF saved to output/197950260991.pdf
+2025-08-10 18:29:56,194 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:29:56,194 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:48:33,898 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:48:33,898 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:48:48,897 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:48:48,897 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:48:57,293 - OCR failed or produced invalid result: '6'. Manual review needed.
+2025-08-10 18:48:57,294 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:49:13,110 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 18:49:13,110 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 18:49:26,146 - SUCCESS: Booklet with Reg No. 1201850101391418 processed. PDF saved to output/1201850101391418.pdf
+2025-08-10 19:01:01,424 - SUCCESS: Booklet with Reg No. 1201850101391418 processed. PDF saved to output/1201850101391418.pdf
+2025-08-10 19:08:28,681 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:09:16,425 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 19:09:16,425 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:10:03,619 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 19:10:03,620 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:10:58,507 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 19:10:58,507 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:11:14,046 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 19:11:14,046 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:13:19,508 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:13:38,299 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:14:31,311 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-10 19:14:31,311 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-10 19:15:01,260 - SUCCESS: Booklet with Reg No. 1201850101391418 processed. PDF saved to output/1201850101391418.pdf
+2025-08-10 19:17:51,917 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-13 20:38:17,118 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-13 20:38:17,118 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-13 20:40:30,233 - SUCCESS: Booklet with Reg No. 2019143 processed. PDF saved to output/2019143.pdf
+2025-08-13 20:46:27,711 - SUCCESS: Booklet with Reg No. 71151 processed. PDF saved to output/71151.pdf
+2025-08-13 20:46:52,325 - OCR failed or produced invalid result: ''. Manual review needed.
+2025-08-13 20:46:52,326 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-13 20:47:14,371 - SUCCESS: Booklet with Reg No. 71151 processed. PDF saved to output/71151.pdf
+2025-08-13 20:47:34,376 - OCR failed or produced invalid result: '1818'. Manual review needed.
+2025-08-13 20:47:34,377 - FAILURE: OCR failed to extract a valid registration number.
+2025-08-13 20:47:44,917 - SUCCESS: Booklet with Reg No. 197950260991 processed. PDF saved to output/197950260991.pdf
