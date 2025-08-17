@@ -2,19 +2,19 @@
 import sys
 import os
 import cv2
-import logging  # Import the logging library
+import logging
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QPushButton, QVBoxLayout, 
-    QLabel, QHBoxLayout, QInputDialog, QLineEdit
+    QLabel, QHBoxLayout, QInputDialog, QLineEdit,
+    QComboBox
 )
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import Qt
 
 # Import core logic from main.py.
-# This keeps the UI separate from the business logic.
 from main import create_pdf, ASSETS_FOLDER, OUTPUT_FOLDER
 
-# Configure logging to use the same file as main.py
+# Configure logging
 LOG_FILE = 'scanning_log.txt'
 logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
                     format='%(asctime)s - %(message)s')
@@ -26,10 +26,7 @@ class ScannerApp(QWidget):
         self.setWindowTitle("Booklet Scanner Automation Tool")
         self.setGeometry(100, 100, 800, 600)
         
-        # This list stores the paths of pages captured for the current booklet.
         self.current_booklet_images = []
-        
-        # Mock image setup for demonstration purposes
         self.mock_image_paths = sorted([os.path.join(ASSETS_FOLDER, f) for f in os.listdir(ASSETS_FOLDER) if f.endswith(('jpg', 'png'))])
         self.mock_image_index = 0
         
@@ -37,42 +34,52 @@ class ScannerApp(QWidget):
         self.update_live_viewer()
 
     def initUI(self):
-        # Main layout for the entire window
         main_layout = QVBoxLayout()
         
-        # Live image viewer through scanners
+        # 1. Live image viewer
         self.image_label = QLabel("Live image viewer through scanners")
         self.image_label.setStyleSheet("border: 2px solid black; background-color: #f0f0f0;")
         self.image_label.setAlignment(Qt.AlignCenter)
         self.image_label.setFixedSize(780, 400)
         main_layout.addWidget(self.image_label)
         
-        # Status label for user feedback
+        # 2. Status label
         self.status_label = QLabel("Ready to start a new booklet. Capture the first page.")
         self.status_label.setStyleSheet("font-weight: bold;")
         main_layout.addWidget(self.status_label)
         
-        # Horizontal layout for buttons
-        button_layout = QHBoxLayout()
+        # 3. Horizontal layout for controls
+        controls_layout = QHBoxLayout()
+        
+        # Dropdown for Subject Code
+        subject_label = QLabel("Subject Code:")
+        controls_layout.addWidget(subject_label)
+        
+        self.subject_combo = QComboBox()
+        self.subject_combo.addItems(["81", "82", "83", "84", "85"])  # Example subject codes
+        self.subject_combo.setFixedSize(80, 30)
+        controls_layout.addWidget(self.subject_combo)
+        
+        # Add stretch to push buttons to the right
+        controls_layout.addStretch(1)
         
         # "Click to capture" button
         self.capture_button = QPushButton("Click to capture")
         self.capture_button.setFixedSize(150, 40)
         self.capture_button.clicked.connect(self.capture_page)
-        button_layout.addWidget(self.capture_button)
+        controls_layout.addWidget(self.capture_button)
         
         # "Finish to PDF" button
         self.finish_button = QPushButton("Finish to PDF")
         self.finish_button.setFixedSize(150, 40)
         self.finish_button.clicked.connect(self.finish_to_pdf)
-        button_layout.addWidget(self.finish_button)
+        controls_layout.addWidget(self.finish_button)
         
-        main_layout.addLayout(button_layout)
+        main_layout.addLayout(controls_layout)
         
         self.setLayout(main_layout)
 
     def update_live_viewer(self):
-        """Displays the next available mock image or a blank screen."""
         if self.mock_image_index < len(self.mock_image_paths):
             image_path = self.mock_image_paths[self.mock_image_index]
             pixmap = QPixmap(image_path)
@@ -83,7 +90,6 @@ class ScannerApp(QWidget):
             self.image_label.setText("Live Capture Mode: Ready to capture new pages.")
             
     def capture_page(self):
-        """Simulates capturing a page from the scanner and updates the UI."""
         if self.mock_image_index < len(self.mock_image_paths):
             page_path = self.mock_image_paths[self.mock_image_index]
             self.current_booklet_images.append(page_path)
@@ -91,14 +97,11 @@ class ScannerApp(QWidget):
             self.status_label.setText(f"Page {len(self.current_booklet_images)} captured. Ready for the next page.")
             self.update_live_viewer()
         else:
-            # We append None to simulate capturing a new, non-existent page
-            # This is where the real scanner capture code would go.
             self.current_booklet_images.append(None)
             self.status_label.setText(f"Page {len(self.current_booklet_images)} captured. Ready for the next page.")
             self.image_label.setText("Live Capture Mode: New page captured.")
             
     def finish_to_pdf(self):
-        """Processes the captured pages for a single booklet and prompts for a name."""
         if not self.current_booklet_images:
             self.status_label.setText("No pages captured. Please capture at least one page.")
             logging.warning("GUI: User attempted to finish with no pages captured.")
@@ -107,7 +110,6 @@ class ScannerApp(QWidget):
         self.status_label.setText("Processing booklet. Awaiting PDF name...")
         QApplication.processEvents()
         
-        # Show a pop-up dialog to get the PDF name from the user
         reg_number, ok_pressed = QInputDialog.getText(
             self, 
             "Enter PDF Name", 
@@ -116,10 +118,12 @@ class ScannerApp(QWidget):
         )
         
         if ok_pressed and reg_number:
-            self.status_label.setText(f"Creating PDF with name: {reg_number}...")
+            subject_code = self.subject_combo.currentText()
+            final_pdf_name = f"{reg_number}_{subject_code}"
+            
+            self.status_label.setText(f"Creating PDF with name: {final_pdf_name}...")
             QApplication.processEvents()
             
-            # Filter out the 'None' entries from the mock capture
             actual_images = [img for img in self.current_booklet_images if img is not None]
 
             if not actual_images:
@@ -130,8 +134,7 @@ class ScannerApp(QWidget):
                 self.update_live_viewer()
                 return
 
-            # Call the PDF creation logic with the user-provided name
-            pdf_path = create_pdf(actual_images, reg_number)
+            pdf_path = create_pdf(actual_images, final_pdf_name)
             
             if pdf_path:
                 self.status_label.setText(f"SUCCESS: PDF saved as {os.path.basename(pdf_path)}. Ready for a new booklet.")
@@ -141,7 +144,7 @@ class ScannerApp(QWidget):
                 self.update_live_viewer()
             else:
                 self.status_label.setText(f"FAILURE: PDF creation failed.")
-                logging.error(f"GUI FAILURE: PDF creation failed for Reg No. {reg_number}.")
+                logging.error(f"GUI FAILURE: PDF creation failed for name {final_pdf_name}.")
         else:
             self.status_label.setText("PDF creation cancelled.")
             logging.info("GUI: PDF creation cancelled by user.")
