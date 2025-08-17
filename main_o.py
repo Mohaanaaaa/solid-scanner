@@ -27,8 +27,10 @@ logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
 # You MUST update these coordinates to match the location of the handwritten number
 # on your first page image (Screenshot (8).png).
 # Format: (x, y, width, height)
-#REG_NUM_ROI = (450, 250, 180, 40) # Example coordinates, please use your own!
-REG_NUM_ROI = (90, 80, 330, 30)
+REG_NUM_ROI = (60, 140, 280, 40)
+#REG_NUM_ROI = (10, 150, 216, 40)
+#REG_NUM_ROI = (10, 90, 330, 30)
+# Placeholder, you must change this!
 
 # ====================================================================
 # CORE FUNCTIONS
@@ -46,76 +48,6 @@ def mock_scanner(image_path):
     
     print(f"Mock scanner: Capturing image from {image_path}")
     return cv2.imread(image_path)
-
-def find_document_corners(image):
-    """
-    Detects the four corners of the document in the image.
-    This is the first step for perspective correction.
-    """
-    # Convert the image to grayscale and blur it
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    gray = cv2.GaussianBlur(gray, (5, 5), 0)
-
-    # Use Canny edge detection to find the edges
-    edged = cv2.Canny(gray, 75, 200)
-
-    # Find the contours (the outline of the shapes in the image)
-    contours, _ = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    
-    # Sort the contours by size in descending order
-    contours = sorted(contours, key=cv2.contourArea, reverse=True)
-
-    # Find the largest contour with 4 corners, which should be our document
-    for c in contours:
-        perimeter = cv2.arcLength(c, True)
-        approx = cv2.approxPolyDP(c, 0.02 * perimeter, True)
-        if len(approx) == 4:
-            return approx
-    
-    return None
-
-def deskew_and_crop(image):
-    """
-    Corrects the perspective of the document in the image.
-    """
-    corners = find_document_corners(image)
-    
-    if corners is None:
-        print("Warning: Could not find document corners for perspective correction. Using original image.")
-        return image
-
-    # Reorder the corners to be in a consistent order (top-left, top-right, etc.)
-    corners = corners.reshape(4, 2)
-    rect = np.zeros((4, 2), dtype="float32")
-    s = corners.sum(axis=1)
-    rect[0] = corners[np.argmin(s)]  # Top-left
-    rect[2] = corners[np.argmax(s)]  # Bottom-right
-    diff = np.diff(corners, axis=1)
-    rect[1] = corners[np.argmin(diff)]  # Top-right
-    rect[3] = corners[np.argmax(diff)]  # Bottom-left
-
-    # Define the destination points for the straightened document
-    (tl, tr, br, bl) = rect
-    widthA = np.sqrt(((br[0] - bl[0]) ** 2) + ((br[1] - bl[1]) ** 2))
-    widthB = np.sqrt(((tr[0] - tl[0]) ** 2) + ((tr[1] - tl[1]) ** 2))
-    maxWidth = max(int(widthA), int(widthB))
-
-    heightA = np.sqrt(((tr[0] - br[0]) ** 2) + ((tr[1] - br[1]) ** 2))
-    heightB = np.sqrt(((tl[0] - bl[0]) ** 2) + ((tl[1] - bl[1]) ** 2))
-    maxHeight = max(int(heightA), int(heightB))
-    
-    dst = np.array([
-        [0, 0],
-        [maxWidth - 1, 0],
-        [maxWidth - 1, maxHeight - 1],
-        [0, maxHeight - 1]], dtype="float32")
-
-    # Get the perspective transform matrix
-    M = cv2.getPerspectiveTransform(rect, dst)
-    # Apply the perspective transform
-    warped = cv2.warpPerspective(image, M, (maxWidth, maxHeight))
-    
-    return warped
 
 def preprocess_image_for_ocr(image):
     """
@@ -141,6 +73,7 @@ def preprocess_image_for_ocr(image):
     gray = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2GRAY)
 
     # Apply a binary threshold to make the numbers stand out
+    # Try different values for '150' to see what works best.
     _, binary = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
 
     # --- DEBUGGING: Save the pre-processed image ---
@@ -159,10 +92,13 @@ def extract_reg_number(image):
     if processed_image is None:
         return None
 
+    # Use pytesseract to perform OCR on the processed image
     text = pytesseract.image_to_string(processed_image, config='--psm 6 -c tessedit_char_whitelist=0123456789')
     
+    # Clean up the extracted text (remove whitespace)
     reg_number = text.strip()
     
+    # Simple validation
     if not reg_number.isdigit() or len(reg_number) < 5:
         logging.warning(f"OCR failed or produced invalid result: '{reg_number}'. Manual review needed.")
         return None
@@ -176,9 +112,12 @@ def create_pdf(image_paths, reg_number):
     if not image_paths:
         return None
 
+    # Load images using PIL
     images = [Image.open(p).convert('RGB') for p in image_paths]
+    
     first_image = images[0]
     
+    # Construct the output filename
     pdf_filename = f"{reg_number}.pdf"
     pdf_path = os.path.join(OUTPUT_FOLDER, pdf_filename)
     
@@ -197,25 +136,18 @@ def main():
     print("Welcome to the Booklet Scanner Automation Tool.")
     print("--------------------------------------------------")
     
+    # This list will hold the paths to the images for the current booklet.
     current_booklet_images = []
     
     print("\nSimulating page capture...")
     
     sample_images = sorted([os.path.join(ASSETS_FOLDER, f) for f in os.listdir(ASSETS_FOLDER) if f.endswith(('jpg', 'png'))])
     
-    if not sample_images:
-        print("No sample images found in assets folder. Please add some to proceed.")
-        return
-        
     for i, img_path in enumerate(sample_images):
         captured_image = mock_scanner(img_path)
         if captured_image is not None:
-            # We add a new step here to deskew the captured image
-            deskewed_image = deskew_and_crop(captured_image)
-            temp_path = os.path.join(OUTPUT_FOLDER, f"deskewed_page_{i}.png")
-            cv2.imwrite(temp_path, deskewed_image)
-            current_booklet_images.append(temp_path)
-            print(f"Page {i+1} captured and straightened successfully.")
+            current_booklet_images.append(img_path)
+            print(f"Page {i+1} captured successfully.")
         else:
             print(f"Failed to capture page {i+1}. Aborting booklet process.")
             current_booklet_images.clear()
@@ -247,6 +179,5 @@ def main():
         print("Failed to extract a valid registration number. Manual intervention required.")
         logging.error("FAILURE: OCR failed to extract a valid registration number.")
         
-
 if __name__ == "__main__":
     main()
